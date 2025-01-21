@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parent Resources - Virtual Learning Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #6366f1;
+      --secondary-color: #4f46e5;
+      --accent-color: #8b5cf6;
+      --text-color: #1f2937;
+      --light-gray: #f3f4f6;
+      --background-color: #ffffff;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--background-color);
+    }
+
+    /* Header */
+    header {
+      background: var(--background-color);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      z-index: 1002;
+    }
+
+    .logo-title img {
+      height: 50px;
+      transition: var(--transition);
+    }
+
+    .logo-title h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    nav a:hover {
+      color: var(--primary-color);
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .hamburger .line {
+      width: 25px;
+      height: 3px;
+      background: var(--primary-color);
+      margin: 4px 0;
+      transition: var(--transition);
+    }
+
+    /* Parent Resources Section */
+    .parent-resources {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-color);
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      font-size: 1.125rem;
+      color: #6b7280;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin-bottom: 64px;
+    }
+
+    .resource-card {
+      background: var(--background-color);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .resource-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .card-header i {
+      font-size: 1.5rem;
+    }
+
+    .card-header h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .dropdown-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 16px;
+    }
+
+    .dropdown-item:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-btn {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: none;
+      border: none;
+      padding: 12px 0;
+      font-size: 1rem;
+      color: var(--text-color);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .dropdown-btn:hover {
+      color: var(--primary-color);
+    }
+
+    .dropdown-btn i {
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown-btn.active i {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      color: #4b5563;
+      line-height: 1.6;
+      padding: 0 16px;
+    }
+
+    .dropdown-content p {
+      padding: 16px 0;
+    }
+
+    .additional-resources {
+      margin-top: 64px;
+    }
+
+    .additional-resources h3 {
+      font-size: 1.875rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--text-color);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary-color);
+      color: white;
+      padding: 4rem 2rem;
+      margin-top: 4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-section {
+      text-align: left;
+    }
+
+    .footer-section h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      color: white;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-section ul li a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-section ul li a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .footer-social a {
+      color: white;
+      font-size: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .footer-social a:hover {
+      color: var(--accent-color);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .footer-bottom a {
+      color: white;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-bottom a:hover {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .section-header h2 {
+        font-size: 2rem;
+      }
+
+      .resource-grid {
+        gap: 24px;
+      }
+
+      .card-header {
+        padding: 20px;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: var(--background-color);
+        position: absolute;
+        top: 80px;
+        right: 2rem;
+        width: 200px;
+        box-shadow: var(--shadow);
+        border-radius: 0.5rem;
+        padding: 1rem;
+      }
+
+      nav ul.active {
+        display: flex;
+      }
+
+      nav ul li {
+        margin: 0.5rem 0;
+      }
+
+      .logo-title h1 {
+        font-size: 1.2rem;
+      }
+
+      .logo-title img {
+        height: 40px;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-section {
+        text-align: center;
+      }
+
+      .footer-social {
+        justify-content: center;
+      }
+    }
+
+    /* Fixed Buttons */
+    .fixed-btn {
+      position: fixed;
+      bottom: 20px;
+      padding: 10px;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      z-index: 1000;
+    }
+
+    #back-to-top-btn {
+      right: 20px;
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    #dark-mode-toggle {
+      left: 20px;
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    body.dark-mode header {
+      background-color: #1e1e1e;
+    }
+
+    body.dark-mode nav a {
+      color: #ffffff;
+    }
+
+    body.dark-mode .section-header h2,
+    body.dark-mode .section-header p {
+      color: #ffffff;
+    }
+
+    body.dark-mode .resource-card {
+      background-color: #1e1e1e;
+    }
+
+    body.dark-mode .dropdown-btn {
+      color: #ffffff;
+    }
+
+    body.dark-mode .dropdown-content {
+      color: #e5e7eb;
+    }
+
+    body.dark-mode .footer-section h3,
+    body.dark-mode .footer-section ul li a,
+    body.dark-mode .footer-bottom p,
+    body.dark-mode .footer-bottom a {
+      color: #ffffff;
+    }
+
+    body.dark-mode .footer-social a {
+      color: #ffffff;
+    }
+
+    body.dark-mode .footer-social a:hover {
+      color: var(--accent-color);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo-title" id="back-to-top">
+      <img src="images/logo.png" alt="Virtual Learning Hub Logo">
+      <h1>Virtual Learning Hub</h1>
+    </div>
+    <nav>
+      <div class="hamburger" id="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#programs">Programs</a></li>
+        <li><a href="index.html#teachers">Teachers</a></li>
+        <li><a href="index.html#resources">Resources</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Parent Resources Section -->
+  <section class="parent-resources">
+    <div class="section-header">
+      <h2>Parent Resources</h2>
+      <p>Empowering parents with modern tools and expert guidance to support your child's educational journey</p>
+    </div>
+
+    <div class="resource-grid">
+      <!-- Guides Card -->
+      <div class="resource-card">
+        <div class="card-header">
+          <i class="fas fa-book-open"></i>
+          <h3>Learning Guides</h3>
+        </div>
+        <div class="dropdown-item">
+          <button class="dropdown-btn">
+            Homework Assistance Strategies
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <p>Practical techniques to create effective study routines and foster independent learning habits.</p>
+          </div>
+        </div>
+        <div class="dropdown-item">
+          <button class="dropdown-btn">
+            Teacher Collaboration Guide
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <p>Build productive partnerships with educators through effective communication strategies.</p>
+          </div>
+        </div>
+        <div class="dropdown-item">
+          <button class="dropdown-btn">
+            Learning Style Assessment
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <p>Identify your child's unique learning preferences and optimize their study environment.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tips Card -->
+      <div class="resource-card">
+        <div class="card-header">
+          <i class="fas fa-lightbulb"></i>
+          <h3>Expert Tips</h3>
+        </div>
+        <div class="dropdown-item">
+          <button class="dropdown-btn">
+            Optimal Learning Spaces
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <p>Design ergonomic study areas that enhance focus and creativity.</p>
+          </div>
+        </div>
+        <div class="dropdown-item">
+          <button class="dropdown-btn">
+            Reading Engagement Techniques
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <p>Innovative methods to cultivate a lifelong love for reading.</p>
+          </div>
+        </div>
+        <div class="dropdown-item">
+          <button class="dropdown-btn">
+            Digital Wellness Strategy
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <p>Balance screen time with productive offline activities.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools Card -->
+      <div class="resource-card">
+        <div class="card-header">
+          <i class="fas fa-toolbox"></i>
+          <h3>Digital Tools</h3>
+        </div>
+        <div class="dropdown-item">
+          <button class="dropdown-btn">
+            Educational Apps Directory
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <p>Curated selection of age-appropriate learning applications.</p>
+          </div>
+        </div>
+        <div class="dropdown-item">
+          <button class="dropdown-btn">
+            Online Learning Platforms
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <p>Trusted sources for supplemental educational content.</p>
+          </div>
+        </div>
+        <div class="dropdown-item">
+          <button class="dropdown-btn">
+            Printable Resources Hub
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <p>Downloadable worksheets and activity templates.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Resources -->
+    <div class="additional-resources">
+      <h3>Essential Support Systems</h3>
+      <div class="resource-grid">
+        <!-- Communication Card -->
+        <div class="resource-card">
+          <div class="card-header">
+            <i class="fas fa-comments"></i>
+            <h3>Communication</h3>
+          </div>
+          <div class="dropdown-item">
+            <button class="dropdown-btn">
+              School Collaboration Guide
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <p>Effective strategies for maintaining productive school relationships.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Safety Card -->
+        <div class="resource-card">
+          <div class="card-header">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Online Safety</h3>
+          </div>
+          <div class="dropdown-item">
+            <button class="dropdown-btn">
+              Digital Protection Tips
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <p>Comprehensive internet safety protocols for young learners.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wellness Card -->
+        <div class="resource-card">
+          <div class="card-header">
+            <i class="fas fa-heartbeat"></i>
+            <h3>Student Wellness</h3>
+          </div>
+          <div class="dropdown-item">
+            <button class="dropdown-btn">
+              Mental Health Resources
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <p>Support systems for emotional and psychological well-being.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#programs">Programs</a></li>
+          <li><a href="index.html#teachers">Teachers</a></li>
+          <li><a href="index.html#resources">Resources</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><a href="mailto:info@virtuallearninghub.com">info@virtuallearninghub.com</a></li>
+          <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+          <li>123 Education Street, Knowledge City</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <div class="footer-social">
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Subscribe to Our Newsletter</h3>
+        <form id="newsletter-form">
+          <input type="email" placeholder="Your Email" required>
+          <button type="submit" class="btn">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023 Virtual Learning Hub. All rights reserved. | Designed by <a href="https://alectronic-solutions.github.io/home" target="_blank">Alectronic Solutions</a></p>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top-btn" class="fixed-btn">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Dark Mode Toggle Button -->
+  <button id="dark-mode-toggle" class="fixed-btn">
+    <i class="fas fa-sun"></i>
+  </button>
+
+  <script>
+    // Dropdown functionality
+    document.querySelectorAll('.dropdown-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const content = button.nextElementSibling;
+        const isActive = button.classList.contains('active');
+        
+        // Close all dropdowns
+        document.querySelectorAll('.dropdown-content').forEach(c => c.style.maxHeight = null);
+        document.querySelectorAll('.dropdown-btn').forEach(b => b.classList.remove('active'));
+        
+        if (!isActive) {
+          button.classList.add('active');
+          content.style.maxHeight = content.scrollHeight + 'px';
+        }
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.dropdown-btn')) {
+        document.querySelectorAll('.dropdown-content').forEach(c => c.style.maxHeight = null);
+        document.querySelectorAll('.dropdown-btn').forEach(b => b.classList.remove('active'));
+      }
+    });
+
+    // Hamburger Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navLinks.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (navLinks.classList.contains('active') && !e.target.closest('nav')) {
+        navLinks.classList.remove('active');
+      }
+    });
+
+    // Back to Top Functionality
+    const backToTopBtn = document.getElementById('back-to-top-btn');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.style.display = 'flex';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const body = document.body;
+
+    darkModeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      const isDarkMode = body.classList.contains('dark-mode');
+      darkModeToggle.innerHTML = isDarkMode ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+      localStorage.setItem('dark-mode', isDarkMode);
+    });
+
+    // Check for saved dark mode preference
+    const savedDarkMode = localStorage.getItem('dark-mode');
+    if (savedDarkMode === 'true') {
+      body.classList.add('dark-mode');
+      darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    } else {
+      body.classList.remove('dark-mode');
+      darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+
+    // Newsletter Form Submission
+    document.getElementById('newsletter-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for subscribing to our newsletter!');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

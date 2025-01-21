@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Learning Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #4f46e5; /* Trustworthy blue */
+      --secondary-color: #6366f1; /* Lighter blue */
+      --accent-color: #10b981; /* Growth green */
+      --text-color: #1f2937; /* Dark gray for text */
+      --light-gray: #f9fafb; /* Light background */
+      --background-color: #ffffff; /* White background */
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--background-color);
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      background: var(--background-color);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      z-index: 1002; /* Ensure logo stays above hamburger */
+    }
+
+    .logo-title img {
+      height: 50px;
+      transition: var(--transition);
+    }
+
+    .logo-title h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    nav a:hover {
+      color: var(--primary-color);
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      z-index: 1001; /* Ensure hamburger is above other elements */
+    }
+
+    .hamburger .line {
+      width: 25px;
+      height: 3px;
+      background: var(--primary-color);
+      margin: 4px 0;
+      transition: var(--transition);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    #banner-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.6);
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 2rem;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-content p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      color: var(--light-gray);
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn {
+      background: var(--primary-color);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    /* Section Common Styles */
+    section {
+      padding: 6rem 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    .section-title p {
+      color: #6b7280;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* About Section */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      background: var(--light-gray);
+      padding: 4rem 2rem;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .about-content {
+      padding: 2rem;
+    }
+
+    .about-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary-color);
+    }
+
+    .about-content p {
+      margin-bottom: 1.5rem;
+      color: #4b5563;
+    }
+
+    .about-features {
+      list-style: none;
+    }
+
+    .about-features li {
+      margin-bottom: 0.75rem;
+      color: #4b5563;
+    }
+
+    .about-features li i {
+      color: var(--accent-color);
+      margin-right: 0.5rem;
+    }
+
+    /* Programs Section */
+    .program-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .program-item {
+      background: var(--background-color);
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .program-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .program-item h3 {
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    /* Teachers Section */
+    .teacher-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .teacher-item {
+      text-align: center;
+      background: var(--background-color);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .teacher-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .teacher-item img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    /* Resources Section */
+    .resource-grid {
+      display: grid;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .resource-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 2rem;
+      background: var(--background-color);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .resource-item:nth-child(even) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .resource-item:nth-child(even) .resource-image {
+      order: 2;
+    }
+
+    .resource-item:nth-child(even) .resource-content {
+      order: 1;
+    }
+
+    .resource-image img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .resource-content {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .resource-content h3 {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .resource-content .btn {
+      margin-top: 2rem; /* Adjust this value to move the buttons down */
+      display: inline-block; /* Ensures the button stays inline */
+    }
+
+    /* Contact Section */
+    #contact {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+
+    #contact-form {
+      display: grid;
+      gap: 1.5rem;
+      background: var(--light-gray);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    #contact-form input,
+    #contact-form textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--text-color);
+      background: var(--background-color);
+      transition: var(--transition);
+    }
+
+    #contact-form input:focus,
+    #contact-form textarea:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    #contact-form textarea {
+      resize: none;
+      height: 150px;
+    }
+
+    #contact-form button {
+      background: var(--primary-color);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    #contact-form button:hover {
+      background: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary-color);
+      color: white;
+      padding: 4rem 2rem;
+      margin-top: 4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-section {
+      text-align: left;
+    }
+
+    .footer-section h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      color: white;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-section ul li a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-section ul li a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .footer-social a {
+      color: white;
+      font-size: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .footer-social a:hover {
+      color: var(--accent-color);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .footer-bottom a {
+      color: white;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-bottom a:hover {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: var(--background-color);
+        position: absolute;
+        top: 80px;
+        right: 2rem;
+        width: 200px;
+        box-shadow: var(--shadow);
+        border-radius: 0.5rem;
+        padding: 1rem;
+      }
+
+      nav ul.active {
+        display: flex;
+      }
+
+      nav ul li {
+        margin: 0.5rem 0;
+      }
+
+      .logo-title h1 {
+        font-size: 1.2rem;
+      }
+
+      .logo-title img {
+        height: 40px;
+      }
+
+      #contact {
+        padding: 4rem 1rem;
+      }
+
+      #contact-form {
+        padding: 1.5rem;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-section {
+        text-align: center;
+      }
+
+      .footer-social {
+        justify-content: center;
+      }
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: var(--background-color);
+      padding: 2rem;
+      border-radius: 0.5rem;
+      width: 90%;
+      max-width: 600px;
+      position: relative;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-content h3 {
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .modal-content ul {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .modal-content .close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-color);
+    }
+
+    .modal-content .close:hover {
+      color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+      .modal-content {
+        width: 95%;
+        padding: 1.5rem;
+      }
+    }
+
+    /* Fixed Buttons */
+    .fixed-btn {
+      position: fixed;
+      bottom: 20px;
+      padding: 10px;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      z-index: 1000;
+    }
+
+    #back-to-top-btn {
+      right: 20px;
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    #dark-mode-toggle {
+      left: 20px;
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    body.dark-mode header {
+      background-color: #1e1e1e;
+    }
+
+    body.dark-mode nav a {
+      color: #ffffff;
+    }
+
+    body.dark-mode .hero-content h1,
+    body.dark-mode .hero-content p {
+      color: #ffffff;
+    }
+
+    body.dark-mode .about,
+    body.dark-mode .program-item,
+    body.dark-mode .teacher-item,
+    body.dark-mode .resource-item,
+    body.dark-mode #contact-form,
+    body.dark-mode .modal-content {
+      background-color: #1e1e1e;
+      color: #ffffff;
+    }
+
+    body.dark-mode .section-title h2,
+    body.dark-mode .about-content h2,
+    body.dark-mode .program-item h3,
+    body.dark-mode .teacher-item h3,
+    body.dark-mode .resource-content h3,
+    body.dark-mode .modal-content h3 {
+      color: var(--primary-color);
+    }
+
+    body.dark-mode .footer-section h3,
+    body.dark-mode .footer-section ul li a,
+    body.dark-mode .footer-bottom p,
+    body.dark-mode .footer-bottom a {
+      color: #ffffff;
+    }
+
+    body.dark-mode .footer-social a {
+      color: #ffffff;
+    }
+
+    body.dark-mode .footer-social a:hover {
+      color: var(--accent-color);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo-title" id="back-to-top">
+      <img src="images/logo.png" alt="Virtual Learning Hub Logo">
+      <h1>Virtual Learning Hub</h1>
+    </div>
+    <nav>
+      <div class="hamburger" id="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <ul id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#teachers">Teachers</a></li>
+        <li><a href="#resources">Resources</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <video autoplay muted loop id="banner-video">
+      <source src="videos/banner-background.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero-content">
+      <h1>Empowering Students Through Innovative Learning</h1>
+      <p>Join our virtual school and unlock your child's full potential with personalized education.</p>
+      <a href="#programs" class="btn">Explore Programs</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="about-image">
+      <img src="images/about-bg.jpg" alt="Students learning">
+    </div>
+    <div class="about-content">
+      <h2>About Virtual Learning Hub</h2>
+      <p>We are a leading online school dedicated to providing high-quality education for K-12 students. Our mission is to create a flexible and engaging learning environment that prepares students for success in the digital age.</p>
+      <ul class="about-features">
+        <li><i class="fas fa-check"></i> Accredited curriculum aligned with state standards</li>
+        <li><i class="fas fa-check"></i> Interactive live classes with expert educators</li>
+        <li><i class="fas fa-check"></i> Personalized learning pathways</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Programs Section -->
+  <section id="programs" class="programs">
+    <div class="section-title">
+      <h2>Our Programs</h2>
+      <p>Tailored educational pathways for every stage of development</p>
+    </div>
+    <div class="program-list">
+      <div class="program-item">
+        <i class="fas fa-pencil-alt fa-3x"></i>
+        <h3>Elementary School</h3>
+        <p>Foundational learning through interactive play and exploration</p>
+        <button class="btn program-btn" data-modal="modal1">Learn More</button>
+      </div>
+      <div class="program-item">
+        <i class="fas fa-atom fa-3x"></i>
+        <h3>Middle School</h3>
+        <p>Engaging curriculum fostering critical thinking skills</p>
+        <button class="btn program-btn" data-modal="modal2">Learn More</button>
+      </div>
+      <div class="program-item">
+        <i class="fas fa-graduation-cap fa-3x"></i>
+        <h3>High School</h3>
+        <p>College-preparatory courses with career guidance</p>
+        <button class="btn program-btn" data-modal="modal3">Learn More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Program Modals -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Elementary School Program</h3>
+      <p>Our Elementary School program focuses on foundational skills in reading, writing, math, and science. We use interactive tools and games to keep young learners engaged. Our curriculum is designed to foster curiosity and creativity while building a strong academic foundation.</p>
+      <ul>
+        <li><i class="fas fa-check"></i> Interactive lessons with gamified learning</li>
+        <li><i class="fas fa-check"></i> Focus on literacy and numeracy skills</li>
+        <li><i class="fas fa-check"></i> Weekly progress reports for parents</li>
+      </ul>
+      <a href="#contact" class="btn contact-now">Contact Now</a>
+    </div>
+  </div>
+
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Middle School Program</h3>
+      <p>Our Middle School program offers a balanced curriculum that includes core subjects, electives, and extracurricular activities to foster well-rounded development. Students are encouraged to explore their interests while developing critical thinking and problem-solving skills.</p>
+      <ul>
+        <li><i class="fas fa-check"></i> STEM-focused projects and labs</li>
+        <li><i class="fas fa-check"></i> Creative writing and arts integration</li>
+        <li><i class="fas fa-check"></i> College and career readiness workshops</li>
+      </ul>
+      <a href="#contact" class="btn contact-now">Contact Now</a>
+    </div>
+  </div>
+
+  <div id="modal3" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>High School Program</h3>
+      <p>Our High School program prepares students for college and beyond with advanced courses, career counseling, and personalized learning plans. Students can choose from a variety of AP courses, electives, and extracurricular activities to tailor their education to their goals.</p>
+      <ul>
+        <li><i class="fas fa-check"></i> Advanced Placement (AP) courses</li>
+        <li><i class="fas fa-check"></i> Career and technical education pathways</li>
+        <li><i class="fas fa-check"></i> Personalized college application support</li>
+      </ul>
+      <a href="#contact" class="btn contact-now">Contact Now</a>
+    </div>
+  </div>
+
+  <!-- Teachers Section -->
+  <section id="teachers" class="teachers">
+    <div class="section-title">
+      <h2>Meet Our Educators</h2>
+      <p>Passionate professionals dedicated to student success</p>
+    </div>
+    <div class="teacher-list">
+      <div class="teacher-item" data-modal="teacher-modal1">
+        <img src="images/teacher1.jpg" alt="John Doe">
+        <h3>John Doe</h3>
+        <p>Mathematics Specialist</p>
+      </div>
+      <div class="teacher-item" data-modal="teacher-modal2">
+        <img src="images/teacher2.jpg" alt="Jane Smith">
+        <h3>Jane Smith</h3>
+        <p>Science Teacher</p>
+      </div>
+      <div class="teacher-item" data-modal="teacher-modal3">
+        <img src="images/teacher3.jpg" alt="Emily Brown">
+        <h3>Emily Brown</h3>
+        <p>English Teacher</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teacher Modals -->
+  <div id="teacher-modal1" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>John Doe</h3>
+      <p>John Doe is a Mathematics Specialist with over 10 years of experience in teaching and curriculum development. He holds a Master's degree in Mathematics and is passionate about making math fun and accessible for all students.</p>
+      <ul>
+        <li><i class="fas fa-check"></i> Expertise in Algebra and Calculus</li>
+        <li><i class="fas fa-check"></i> Focus on problem-solving and critical thinking</li>
+        <li><i class="fas fa-check"></i> Interactive and engaging teaching style</li>
+      </ul>
+      <a href="#contact" class="btn contact-now">Contact Now</a>
+    </div>
+  </div>
+
+  <div id="teacher-modal2" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Jane Smith</h3>
+      <p>Jane Smith is a Science Teacher with a background in Biology and Environmental Science. She has a passion for inspiring students to explore the natural world and develop a love for science.</p>
+      <ul>
+        <li><i class="fas fa-check"></i> Expertise in Biology and Chemistry</li>
+        <li><i class="fas fa-check"></i> Hands-on experiments and lab work</li>
+        <li><i class="fas fa-check"></i> Focus on real-world applications</li>
+      </ul>
+      <a href="#contact" class="btn contact-now">Contact Now</a>
+    </div>
+  </div>
+
+  <div id="teacher-modal3" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Emily Brown</h3>
+      <p>Emily Brown is an English Teacher with a focus on literature and creative writing. She has a Master's degree in English Literature and is dedicated to helping students develop strong communication skills.</p>
+      <ul>
+        <li><i class="fas fa-check"></i> Expertise in Literature and Writing</li>
+        <li><i class="fas fa-check"></i> Focus on critical analysis and creativity</li>
+        <li><i class="fas fa-check"></i> Encourages self-expression through writing</li>
+      </ul>
+      <a href="#contact" class="btn contact-now">Contact Now</a>
+    </div>
+  </div>
+
+  <!-- Resources Section -->
+  <section id="resources" class="resources">
+    <div class="section-title">
+      <h2>Learning Resources</h2>
+      <p>Comprehensive support for students and parents</p>
+    </div>
+    <div class="resource-grid">
+      <div class="resource-item">
+        <div class="resource-image">
+          <img src="images/resource1.jpg" alt="Student Portal">
+        </div>
+        <div class="resource-content">
+          <h3><i class="fas fa-book"></i> Student Portal</h3>
+          <p>Access your assignments, grades, and learning materials all in one place. Stay organized and on top of your studies with our easy-to-use student portal.</p>
+          <a href="portal.html" class="btn">Visit Portal</a>
+        </div>
+      </div>
+      <div class="resource-item">
+        <div class="resource-image">
+          <img src="images/resource2.jpg" alt="Parent Resources">
+        </div>
+        <div class="resource-content">
+          <h3><i class="fas fa-users"></i> Parent Resources</h3>
+          <p>Find helpful guides, tips, and tools to support your child's learning journey. Stay informed and involved in their education.</p>
+          <a href="parent-resources.html" class="btn">Explore Resources</a>
+        </div>
+      </div>
+      <div class="resource-item">
+        <div class="resource-image">
+          <img src="images/resource3.jpg" alt="Library">
+        </div>
+        <div class="resource-content">
+          <h3><i class="fas fa-book-open"></i> Library</h3>
+          <p>Explore our extensive digital library filled with e-books, research papers, and educational videos. Perfect for students and educators alike.</p>
+          <a href="library.html" class="btn">Visit Library</a>
+        </div>
+      </div>
+      <div class="resource-item">
+        <div class="resource-image">
+          <img src="images/resource4.jpg" alt="Technical Support">
+        </div>
+        <div class="resource-content">
+          <h3><i class="fas fa-headset"></i> Technical Support</h3>
+          <p>Having trouble with our platform? Our technical support team is here to help. Get quick solutions to your technical issues.</p>
+          <a href="technical-support.html" class="btn">Get Help</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="section-title">
+      <h2>Contact Us</h2>
+      <p>We're here to answer your questions</p>
+    </div>
+    <form id="contact-form">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#teachers">Teachers</a></li>
+          <li><a href="#resources">Resources</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><a href="mailto:info@virtuallearninghub.com">info@virtuallearninghub.com</a></li>
+          <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+          <li>123 Education Street, Knowledge City</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <div class="footer-social">
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Subscribe to Our Newsletter</h3>
+        <form id="newsletter-form">
+          <input type="email" placeholder="Your Email" required>
+          <button type="submit" class="btn">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023 Virtual Learning Hub. All rights reserved. | Designed by <a href="https://alectronic-solutions.github.io/home" target="_blank">Alectronic Solutions</a></p>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top-btn" class="fixed-btn">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Dark Mode Toggle Button -->
+  <button id="dark-mode-toggle" class="fixed-btn">
+    <i class="fas fa-sun"></i>
+  </button>
+
+  <script>
+    // Modal functionality
+    const modalTriggers = document.querySelectorAll('.program-btn, .teacher-item');
+    const modals = document.querySelectorAll('.modal');
+    const closeButtons = document.querySelectorAll('.close');
+    const contactNowButtons = document.querySelectorAll('.contact-now');
+
+    modalTriggers.forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const modalId = trigger.dataset.modal || trigger.closest('.teacher-item').dataset.modal;
+        const modal = document.getElementById(modalId);
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Disable scrolling when modal is open
+      });
+    });
+
+    closeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const modal = button.closest('.modal');
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling when modal is closed
+      });
+    });
+
+    contactNowButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const modal = button.closest('.modal');
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling when modal is closed
+        document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal')) {
+        e.target.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling when clicking outside the modal
+      }
+    });
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Form submission
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for your message! We will respond shortly.');
+      e.target.reset();
+    });
+
+    // Hamburger Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navLinks.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (navLinks.classList.contains('active') && !e.target.closest('nav')) {
+        navLinks.classList.remove('active');
+      }
+    });
+
+    // Back to Top Functionality
+    const backToTopBtn = document.getElementById('back-to-top-btn');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.style.display = 'flex';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const body = document.body;
+
+    darkModeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      const isDarkMode = body.classList.contains('dark-mode');
+      darkModeToggle.innerHTML = isDarkMode ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+      localStorage.setItem('dark-mode', isDarkMode);
+    });
+
+    // Check for saved dark mode preference
+    const savedDarkMode = localStorage.getItem('dark-mode');
+    if (savedDarkMode === 'true') {
+      body.classList.add('dark-mode');
+      darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    } else {
+      body.classList.remove('dark-mode');
+      darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+
+    // Newsletter Form Submission
+    document.getElementById('newsletter-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for subscribing to our newsletter!');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

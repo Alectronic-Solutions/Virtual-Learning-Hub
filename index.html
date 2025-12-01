@@ -155,6 +155,11 @@
         .text-center { text-align: center; }
         .mt-20 { margin-top: 2rem; }
 
+        /* Global Cursor Fix */
+        a, button, .btn, .faq-question, .footer-col ul li a, .legal-links a {
+            cursor: pointer !important;
+        }
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -1739,8 +1744,8 @@
             <div class="footer-bottom-container">
                 <p>&copy; 2025 <a href="https://alectronic-solutions.github.io/" target="_blank" class="company-link">Alectronic Solutions</a>. All rights reserved.</p>
                 <div class="legal-links">
-                    <a onclick="openInfoModal('Privacy Policy', 'We value your privacy. We do not sell your data to third parties. (Full text placeholder)')">Privacy Policy</a>
-                    <a onclick="openInfoModal('Terms of Service', 'By using our site, you agree to our community guidelines and payment terms. (Full text placeholder)')">Terms of Service</a>
+                    <a onclick="openInfoModal('Privacy Policy', 'We value your privacy. We do not sell your data to third parties.')">Privacy Policy</a>
+                    <a onclick="openInfoModal('Terms of Service', 'By using our site, you agree to our community guidelines and payment terms.')">Terms of Service</a>
                     <a onclick="openInfoModal('Cookie Settings', 'You can manage your cookie preferences in your browser settings.')">Cookie Settings</a>
                 </div>
             </div>
